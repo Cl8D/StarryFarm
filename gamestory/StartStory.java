@@ -62,6 +62,7 @@ public class StartStory extends UserInfo {
 		System.out.print("편지가 도착하였습니다.(press y)>> ");
 		userPress = scanner.next();
 		if(userPress.equals("y")) {
+			ClearConsole.clearConsole();
 			System.out.println("------------------------------------------------------------------");
 			System.out.println("안녕, " + user.getName() +"!");
 			System.out.println("나는 스태리팜의 시장인 자바바라고 해! 우리 마을에 온 걸 환영해.");
@@ -83,6 +84,7 @@ public class StartStory extends UserInfo {
 		System.out.println("------------------------------------------------------------------");
 		Postbox.setPostCount(0);
 		System.out.println();
+		ConsoleStop.threadSleep(3000);
 		
 			
 	}

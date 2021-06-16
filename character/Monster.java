@@ -1,10 +1,24 @@
 package character;
 
+import java.net.Socket;
+
+import item.Weapon;
+import myNetwork.myServer;
+import town.MartItem;
+
 public class Monster extends Character {
 	
 	public Monster() {
 		;
 	}
+
+	
+	
+	public Monster(String name, int hp, int maxHp, int gold, int power) { // 결투장을 위한 생성자
+		super(name, "없음", hp, maxHp, power, gold, 0); 
+
+	}
+	
 	
 	public Monster(String name, String gender, int hp, int maxHp, int power, int gold, int level) {
 		super(name, gender, hp, maxHp, power, gold, level);
@@ -24,5 +38,13 @@ public class Monster extends Character {
 		user.setGold(monster.getGold());
 		monster.setHp(monster.getMaxHp());
 	}
+
+
+
+	
+
+
+
+
 	
 }

@@ -1,7 +1,10 @@
 package character;
 
+import java.net.Socket;
+
 public abstract class Character {
 	protected static Farmer user;
+
 	protected String name; // 캐릭터 이름
 	protected String gender; // 캐릭터 성별
 	protected int gold; // 가지고 있는 골드(돈)
@@ -9,11 +12,11 @@ public abstract class Character {
 	protected int maxHp; //최대 체력
 	protected int power; //공격력
 	protected int level; // 레벨
+	protected Socket socket; // 연결된 소켓
 	
 	public Character() {
-		;
 	}
-	
+
 	public Character(String name, String gender, int hp, int maxHp, int power, int gold, int level) {
 		this.name =  name;
 		this.gender = gender;
@@ -51,9 +54,14 @@ public abstract class Character {
 		this.gold += gold;
 	}
 	
+	public void setGold2(int gold) {
+		this.gold = gold;
+	}
+	
 	public int getHp() {
 		return hp;
 	}
+	
 	
 	public void setHp(int hp) {
 		if(hp > maxHp)
@@ -64,6 +72,15 @@ public abstract class Character {
 		else {
 			this.hp = hp;
 		}
+	}
+	
+	public void setHp2(int hp) {
+		this.hp = hp;
+	}
+	
+	
+	public Socket getSocket() {
+		return socket;
 	}
 	
 	public int getMaxHp() {

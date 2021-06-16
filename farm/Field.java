@@ -1,6 +1,7 @@
 package farm;
 
 import java.io.File;
+import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +17,6 @@ import item.Seed;
 public class Field extends UserInfo{
 	/*** °´Ã¼ »ý¼º ***/
 	static Farm myFarm = new Farm();
-	
 	private static int ableFarming;
 	private static int firstFarming =  0;
 	private static int seedCount = 0; // ½ÉÀº ¾¾¾ÑÀÇ ÃÑ °³¼ö
@@ -61,11 +61,14 @@ public class Field extends UserInfo{
 	private static File seed = new File("./seed.txt"); // ¾¾¾Ñ
 	private static File getFruit = new File("./getFruit.txt"); //¿­¸Å ¼öÈ®
 	
+	static Socket socket;
 	
 	public Field(String seed, List<Seed> springSeed , List<Seed> summerSeed, List<Seed> autumnSeed) {
 		Field.springSeeds = springSeed;
 		Field.summerSeeds = summerSeed;
 		Field.autumnSeeds = autumnSeed;
+		this.socket = super.getSocket();
+
 	}
 	
 
@@ -73,6 +76,7 @@ public class Field extends UserInfo{
 		Field.springFruits = springFruit;
 		Field.summerFruits = summerFruit;
 		Field.autumnFruits = autumnFruit;
+		this.socket = super.getSocket();
 	}
 	
 	
@@ -250,6 +254,7 @@ public class Field extends UserInfo{
 		}
 		else {
 			System.out.println("		ÀÜ¾×ÀÌ ºÎÁ·ÇÕ´Ï´Ù.		");
+			ConsoleStop.threadSleep(1000);
 			return;
 		}
 		

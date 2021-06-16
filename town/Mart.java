@@ -9,8 +9,8 @@ import farm.Farm;
 import farm.Inventory;
 import gamestory.SpringStory;
 
-class Mart extends Inventory{
-	private int storyCount = 0;
+public class Mart extends Inventory{
+	public static int storyCount = 0;
 	
 	WhatItem whatItem = new WhatItem();
 	
@@ -23,23 +23,11 @@ class Mart extends Inventory{
 		ConsoleStop.threadSleep(500);
 		if((storyCount == 0) && (Farm.getYear() == 1) && (Farm.getSeason().equals("봄")) && (Farm.getDay() == 1)){
 			SpringStory.first_mart();
-			System.out.println("============================================================");
-			
-			for(int i =0; i< MartItem.getBasicTools().size(); i++) {
-				if(i == MartItem.getBasicTools().size() - 1)
-					System.out.println(MartItem.getBasicTools().get(i).getName() + "을(를) 얻었습니다!");
-				else
-					System.out.print(MartItem.getBasicTools().get(i).getName() + ",");
-			}
-		
-			user.setTools(MartItem.getBasicTools());
 			ConsoleStop.threadSleep(1000);
 			storyCount++;
 		}
-		Inventory.setBasicTool(MartItem.getBasicTools().get(1), MartItem.getBasicTools().get(2), MartItem.getBasicTools().get(3));
 		ClearConsole.clearConsole();
 		while(true) {
-		System.out.println("============================================================");
 		System.out.println("		무엇을 하시겠어요?		");
 		System.out.println("		▶1. 물건 구매하기		");
 		System.out.println("		▶2. 물건 판매하기		");
@@ -48,16 +36,17 @@ class Mart extends Inventory{
 		
 		Scanner scanner = new Scanner(System.in);
 			System.out.print("(1~3)>>");
-			int userPress = 0;
-			userPress = scanner.nextInt();
+			String userPress;
+			userPress = scanner.nextLine();
 			switch(userPress) {
-			case 1 :
+			case "1" :
 				buyItem();
 				break;
-			case 2 :
+			case "2" :
 				sellItem();
 				break;
-			case 3 :
+			case "3" :
+				ClearConsole.clearConsole();
 				return;
 			default: 
 				System.out.println("잘못된 입력입니다. 다시 입력해 주세요.");
@@ -84,6 +73,7 @@ class Mart extends Inventory{
 			userPress = scanner.nextInt();
 			switch(userPress) {
 			case 0 :
+				ClearConsole.clearConsole();
 				return;
 			case 1 :
 				whatItem.weaponList();
@@ -115,9 +105,10 @@ class Mart extends Inventory{
 		System.out.print("(0~2)>>");
 		userPress = scanner.nextInt();
 		
-		if(userPress == 0)
+		if(userPress == 0) {
+			ClearConsole.clearConsole();
 			return;
-		
+		}		
 		else if(userPress == 1) {
 			while(true) {
 			ClearConsole.clearConsole();

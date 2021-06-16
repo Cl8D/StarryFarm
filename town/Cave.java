@@ -59,7 +59,7 @@ public class Cave extends UserInfo implements specialPlace{
 		System.out.print("		굴 안으로 들어갈까요?(y/n) ");
 		String userPress = scanner.next();
 		if(userPress.equals("y")) {
-			if(user.getWeapon() == null) {
+			if(user.getWeapon().getName().equals("없음")) {
 				System.out.println("		보유 중인 무기가 없어요. 상점에서 무기 구매 후 인벤토리에서 장착해 주세요.");
 				ConsoleStop.threadSleep(1500);
 				return;

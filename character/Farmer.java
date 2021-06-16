@@ -1,8 +1,10 @@
 package character;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import console.ConsoleStop;
 import farm.Farm;
 import item.Item;
 import item.Seed;
@@ -60,11 +62,14 @@ public class Farmer extends Character {
 	public void die(Character monster) {
 		System.out.println("		" + monster.getName() + "에게 당했어요.");
 		if(this.gold > 0)
-			System.out.println("		Hp가 0이 되어 기절했어요. 치료비로 " + this.gold / 2 + "G가 차감되었어요.");
+			System.out.println("		Hp가 0이 되어 기절했어요. 치료비로 " + user.getGold() / 2 + "G가 차감되었어요.");
 		else
 			System.out.println("		Hp가 0이 되어 기절했어요. 돈이 없어 자바바에게 무료로 치료받았어요.");
-		this.gold /= 2;
+		int now_gold = user.getGold()/2;
+		user.setGold2(now_gold);
 		System.out.println("		집으로 돌아갑니다.");
+		user.setHp(20);
+		ConsoleStop.threadSleep(1500);
 		farm.myFarm();
 	}
 	
@@ -116,6 +121,22 @@ public class Farmer extends Character {
 		}	
 		return "Success";
 	}
+	
+	
+	public void initItem(Item item) {
+		if(item instanceof Weapon) {
+			Weapon weapon = (Weapon) item;
+			Farmer.weapons.add(weapon);	
+		}
+		
+		else if(item instanceof Tool) {
+			Tool tool = (Tool) item;
+			Farmer.tools.add(tool);
+		}	
+	}
+	
+	
+	
 	
 	public String buyItem(Seed seed, int seedCount, String season) {
 		this.gold -= seed.getPrice() * seedCount;
